@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050807">
+  <title>ONYX — Digital Economy</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="ONYX início"><span class="brand-mark">O</span><span>ONYX<small>DIGITAL ECONOMY</small></span></a>
+    <div class="top-actions"><span class="status-dot"></span><span id="connectionLabel">Configuração necessária</span></div>
+  </header>
+  <main class="shell">
+    <section id="setupNotice" class="notice">
+      <strong>Quase pronto para conectar.</strong>
+      <p>O app já está montado. Para contas e transferências compartilhadas, crie um projeto Supabase gratuito e configure as chaves em <code>app.js</code>. Veja <code>LEIA-ME.md</code>.</p>
+    </section>
+    <section id="authView" class="auth-layout">
+      <div class="hero-copy">
+        <span class="eyebrow">YOUR WORLD. YOUR CURRENCY.</span>
+        <h1>Uma economia<br><span>do seu jeito.</span></h1>
+        <p>Crie sua conta, acompanhe seus ONX e envie moedas virtuais para amigos. Simples, compartilhado e feito para explorar.</p>
+        <div class="feature-pills"><span>● Carteira virtual</span><span>↗ Transferências</span><span>⌁ Histórico</span></div>
+      </div>
+      <div class="panel auth-panel">
+        <div class="panel-heading"><span class="mini-icon">↗</span><div><h2>Entrar no ONYX</h2><p>Seu espaço na economia digital.</p></div></div>
+        <form id="authForm">
+          <label for="email">E-mail</label><input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          <label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="Mínimo de 8 caracteres" required>
+          <div class="button-row"><button class="btn btn-primary" id="loginBtn" type="submit">Entrar <span>→</span></button><button class="btn btn-secondary" id="signupBtn" type="button">Criar conta</button></div>
+        </form>
+        <p id="authMessage" class="message" aria-live="polite"></p>
+        <p class="fineprint">Moeda fictícia sem valor monetário real. Nunca reutilize a senha de outros serviços.</p>
+      </div>
+    </section>
+
+    <section id="appView" class="app-view hidden">
+      <div class="welcome-row"><div><span class="eyebrow">VISÃO GERAL</span><h1>Seu espaço, <span id="displayName">explorador</span>.</h1></div><button id="logoutBtn" class="btn btn-secondary">Sair ↗</button></div>
+      <div class="dashboard-grid">
+        <article class="panel balance-card">
+          <div class="card-top"><span>Saldo disponível</span><span class="coin-badge">ONX</span></div>
+          <div class="balance" id="balance">— <small>ONX</small></div>
+          <p class="muted">Moedas virtuais da economia ONYX</p>
+          <div class="balance-line"></div><div class="balance-foot"><span><i class="status-dot"></i> Carteira ativa</span><span id="userTag">Conta</span></div>
+        </article>
+        <article class="panel quick-card"><span class="eyebrow">AÇÃO RÁPIDA</span><h2>Transferir ONX</h2><p class="muted">Envie moedas para outra conta ONYX.</p>
+          <form id="transferForm"><label for="recipient">Usuário destinatário</label><input id="recipient" autocomplete="off" placeholder="ex.: pedro123" required><label for="amount">Quantidade de ONX</label><input id="amount" type="number" min="0.01" step="0.01" placeholder="25.00" required><label for="memo">Mensagem (opcional)</label><input id="memo" maxlength="120" placeholder="Valeu pela ajuda!"><button class="btn btn-primary full" type="submit">Confirmar transferência <span>→</span></button></form>
+          <p id="transferMessage" class="message" aria-live="polite"></p>
+        </article>
+      </div>
+      <article class="panel history-panel"><div class="section-heading"><div><span class="eyebrow">ATIVIDADE</span><h2>Transações recentes</h2></div><button id="refreshBtn" class="btn btn-secondary">Atualizar ↻</button></div><div id="historyList" class="history-list"><div class="empty">Suas transações aparecerão aqui.</div></div></article>
+      <article id="adminPanel" class="panel admin-panel hidden"><span class="eyebrow">ADMINISTRAÇÃO</span><h2>Distribuir ONX</h2><p class="muted">Apenas a conta autorizada pode emitir moedas virtuais.</p><form id="mintForm" class="mint-form"><div><label for="mintRecipient">Usuário</label><input id="mintRecipient" required placeholder="destinatário"></div><div><label for="mintAmount">Quantidade</label><input id="mintAmount" type="number" min="0.01" step="0.01" required placeholder="100"></div><div><label for="mintReason">Motivo</label><input id="mintReason" maxlength="120" required placeholder="Bônus inicial"></div><button class="btn btn-primary" type="submit">Emitir ONX</button></form><p id="mintMessage" class="message" aria-live="polite"></p></article>
+    </section>
+    <footer><span>ONYX <b>●</b> DIGITAL ECONOMY</span><span>Ambiente de moeda fictícia · Não é instituição financeira</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
